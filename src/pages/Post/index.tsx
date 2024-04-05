@@ -68,6 +68,7 @@ export function Post() {
             {!!createdAt && (
               <span>
                 {formatDistanceToNow(new Date(createdAt), {
+                  addSuffix: true,
                   locale: ptBR,
                 })}
               </span>
