@@ -9,6 +9,12 @@ export const ProfileContainer = styled.div`
 
   display: flex;
   gap: 2rem;
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const ProfileImage = styled.img`
@@ -18,12 +24,18 @@ export const ProfileImage = styled.img`
   max-width: 100%;
   aspect-ratio: 1;
 `;
-export const ProfileContent = styled.div``;
+export const ProfileContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+`;
 export const ProfileHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 0.5rem;
+  gap: 0.5rem;
 
   h1 {
     color: ${(props) => props.theme["base-title"]};

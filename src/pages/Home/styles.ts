@@ -7,4 +7,8 @@ export const PostsList = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   margin-top: 3rem;
+
+  @media (max-width: 575px) {
+    grid-template-columns: 1fr;
+  }
 `;
