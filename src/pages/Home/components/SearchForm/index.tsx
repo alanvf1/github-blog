@@ -4,6 +4,7 @@ import { SearchFormContainer, SearchFormPostsCount } from "./styles";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PostCardProps } from "../PostCard";
 import { api } from "../../../../lib/axios";
+import { GithubPostResponse } from "../..";
 
 export const searchFormSchema = z.object({
   search: z.string(),
@@ -27,14 +28,16 @@ export function SearchForm({ posts, handlePosts }: SearchFormProps) {
     const response = await api.get(
       `/search/issues?q=${search}%20repo:alanvf1/github-blog`
     );
-    const newData = response.data.items.map((post: any) => {
-      return {
-        id: post.number,
-        title: post.title,
-        body: post.body,
-        createdAt: post.created_at,
-      };
-    });
+    const newData = response.data.items.map(
+      ({ number, title, body, created_at }: GithubPostResponse) => {
+        return {
+          id: number,
+          title: title,
+          body: body,
+          createdAt: created_at,
+        };
+      }
+    );
     handlePosts(newData);
   }
 

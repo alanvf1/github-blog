@@ -5,18 +5,27 @@ import { Profile } from "./components/Profile";
 import { SearchForm } from "./components/SearchForm";
 import { HomeContainer, PostsList } from "./styles";
 
+export interface GithubPostResponse {
+  number: number;
+  title: string;
+  body: string;
+  created_at: string;
+}
+
 export function Home() {
   const [posts, setPosts] = useState<PostCardProps[]>([]);
   async function loadPosts() {
     const response = await api.get("/repos/alanvf1/github-blog/issues");
-    const data = response.data.map((post: any) => {
-      return {
-        id: post.number,
-        title: post.title,
-        body: post.body,
-        createdAt: post.created_at,
-      };
-    });
+    const data = response.data.map(
+      ({ number, title, body, created_at }: GithubPostResponse) => {
+        return {
+          id: number,
+          title: title,
+          body: body,
+          createdAt: created_at,
+        };
+      }
+    );
     setPosts(data);
   }
 
